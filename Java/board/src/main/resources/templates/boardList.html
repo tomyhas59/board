@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 리스트 페이지</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #eaeaea;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+        }
+
+        .post {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            background: #f9f9f9;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .post:hover {
+            background-color: #f1f1f1;
+            transform: scale(1.02);
+        }
+
+        .post:last-child {
+            border-bottom: none;
+        }
+
+        .post div {
+            margin-bottom: 10px;
+        }
+
+        .post-id {
+            font-weight: 600;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .post-title {
+            font-size: 1.4em;
+            color: #555;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .post-footer {
+            font-size: 0.9em;
+            color: #888;
+            text-align: right;
+        }
+
+        /* 추가된 스타일 */
+        .btn {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 10px 0;
+            font-size: 14px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            text-align: center;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="/board/write" class="btn">새 게시글 작성</a>
+    <div th:each="board : ${list}" class="post">
+        <div class="post-header">
+            <div class="post-id" th:text="${board.id}"></div>
+        </div>
+        <div class="post-title" th:text="${board.title}"></div>
+    </div>
+</div>
+</body>
+</html>

@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 
-//JPA 설정된 Entity 읽음
+//JPA가 설정된 Entity 읽어서 처리
 @Entity // = table
 @Data
 public class Board {
