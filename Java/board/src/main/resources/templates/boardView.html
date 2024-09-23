@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세 페이지</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            color: #555;
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .btn {
+                  display: inline-block;
+                  margin-top: 20px;
+                  padding: 10px 20px;
+                  background-color: #28a745;
+                  color: #fff;
+                  text-decoration: none;
+                  border-radius: 4px;
+                  font-size: 16px;
+                  transition: background-color 0.3s;
+              }
+
+              .btn:hover {
+                  background-color: #218838;
+              }
+
+    </style>
+</head>
+<body>
+<a href="/board/list" class="btn">게시글 페이지</a>
+<div class="container">
+    <h1 th:text="${board.title}"></h1>
+    <p th:text="${board.content}"></p>
+</div>
+</body>
+</html>
