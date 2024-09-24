@@ -28,4 +28,9 @@ public class BoardService {
     public Board boardView(Integer id){
         return  boardRepository.findById(id).get();
     }
+
+    //게시글 삭제
+    public void boardDelete(Integer id){
+        boardRepository.deleteById(id);
+    }
 }
