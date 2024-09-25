@@ -96,6 +96,7 @@
     <div class="contentContainer">
         <p th:text="${board.content}"></p>
         <a th:href="@{/board/delete(id=${board.id})}">삭제</a>
+        <a th:href="@{/board/modify/{id}(id=${board.id})}">수정</a>
     </div>
 </div>
 </body>
