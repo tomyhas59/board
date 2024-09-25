@@ -34,7 +34,7 @@ public class BoardController {
     @GetMapping("/board/list")
     public String boardList(Model model){
 
-        model.addAttribute("list",boardService.boardList());
+        model.addAttribute("list",boardService.boardList()); //html에 list라는 이름으로 전달
 
         return "boardList";
     }
@@ -60,7 +60,7 @@ public class BoardController {
     }
 
     @PostMapping("/board/update/{id}")
-    public String boardUpdate(@PathVariable("id") Integer id, Board board) {
+    public String boardUpdate(@PathVariable("id") Integer id, Board board,Model model) {
 
         Board existingBoard = boardService.boardView(id);
 
@@ -69,7 +69,10 @@ public class BoardController {
 
         boardService.write(existingBoard);
 
-        return "redirect:/board/list";
+        model.addAttribute("message", "글 수정 완료");
+        model.addAttribute("searchUrl", "/board/list");
+
+        return "message";
     }
 
 }
