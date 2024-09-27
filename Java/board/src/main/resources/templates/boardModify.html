@@ -77,9 +77,10 @@
 <body>
 
 <div class="container">
-    <form th:action="@{/board/update/{id}(id=${board.id})}" method="post">
+    <form th:action="@{/board/update/{id}(id=${board.id})}" method="post" enctype="multipart/form-data">
       <input type="text" name="title" placeholder="제목을 입력하세요" th:value="${board.title}">
       <textarea name="content" rows="4" placeholder="내용을 입력하세요" th:text="${board.content}"></textarea>
+        <input type="file" name="file">
       <button type="submit">수정</button>
     </form>
     <a href="/board/list" class="btn">게시글 페이지</a>
