@@ -3,6 +3,10 @@ package com.example.board.controller;
 import com.example.board.entity.Board;
 import com.example.board.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,14 +32,23 @@ public class BoardController {
         model.addAttribute("message", "글 작성 완료");
         model.addAttribute("searchUrl", "/board/list");
 
-        return "message";
+        return "redirect:/board/list";
     }
 
 
     @GetMapping("/board/list")
-    public String boardList(Model model) {
+    public String boardList(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
-        model.addAttribute("list", boardService.boardList()); //html에 list라는 이름으로 전달
+        Page<Board> list = boardService.boardList(pageable);
+
+        int nowPage = list.getPageable().getPageNumber() + 1;
+        int startPage = Math.max(nowPage - 3, 1);
+        int endPage = Math.min(nowPage + 4, list.getTotalPages());
+
+        model.addAttribute("list", list); //html에 list라는 이름으로 전달
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
 
         return "boardList";
     }
