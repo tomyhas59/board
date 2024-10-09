@@ -37,19 +37,25 @@ public class BoardController {
 
 
     @GetMapping("/board/list")
-    public String boardList(Model model, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String boardList(Model model,
+                            @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
+                            @RequestParam(value = "searchKeyword", required = false) String searchKeyword) {
+        Page<Board> list;
 
-        Page<Board> list = boardService.boardList(pageable);
+        if (searchKeyword == null || searchKeyword.isEmpty()) {
+            list = boardService.boardList(pageable);
+        } else {
+            list = boardService.boardSearchList(searchKeyword, pageable);
+        }
 
         int nowPage = list.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 3, 1);
         int endPage = Math.min(nowPage + 4, list.getTotalPages());
 
-        model.addAttribute("list", list); //html에 list라는 이름으로 전달
+        model.addAttribute("list", list); // html에 list라는 이름으로 전달
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
-
         return "boardList";
     }
 
