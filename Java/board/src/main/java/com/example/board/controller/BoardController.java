@@ -47,7 +47,7 @@ public class BoardController {
         } else {
             list = boardService.boardSearchList(searchKeyword, pageable);
         }
-
+        boolean isEmpty = list.isEmpty();
         int nowPage = list.getPageable().getPageNumber() + 1;
         int startPage = Math.max(nowPage - 3, 1);
         int endPage = Math.min(nowPage + 4, list.getTotalPages());
@@ -56,6 +56,7 @@ public class BoardController {
         model.addAttribute("nowPage", nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+        model.addAttribute("isEmpty", isEmpty);
         return "boardList";
     }
 
